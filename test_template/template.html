@@ -1,0 +1,44 @@
+<div id="randomId-listingsHeader">
+	        <div class="listings-headline1">Check out your offer{% if listingset.numListingsReturned > 1 %}s{% endif %} below!</div>
+		        {% if listingset.numListingsReturned > 1 %}
+			                <div class="listings-headline2">Select at least 2-3 companies to get the very best rate</div>
+					        {% endif %}
+</div>
+
+{% set i = 1%}
+{% for adv in listingset.listing %}
+                <div class="listing">
+			                        <div class="logoWrapper">
+							                                <img onclick="sh.click({{i}}, '{{adv.clickurl}}')" src="{{adv.logo}}" alt="{{adv.displayname}}" title="{{adv.displayname}}" />
+											                        </div>
+														                        <div class="shCstmRatingWrpr">
+																		                                <div class="SHcstmRating">
+																							                                        <ul class="SHcstmRatings">
+																													        {% if adv.nerdwallet_rating.rating === '3.0' %}<li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-Off"></div></li><li><div class="GreenStar GreenStar-Off"></div></li>
+																														        {% elif adv.nerdwallet_rating.rating === '3.5' %}<li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-Half"></div></li><li><div class="GreenStar GreenStar-Off"></div></li>
+																															        {% elif adv.nerdwallet_rating.rating === '4.0' %}<li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-Off"></div></li>
+																																        {% elif adv.nerdwallet_rating.rating === '4.5' %}<li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-Half"></div></li>
+																																	        {% elif adv.nerdwallet_rating.rating === '5.0' %}<li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li><li><div class="GreenStar GreenStar-On"></div></li>
+
+
+																																		                                                {% else %}
+																																								                                                <li class="cstmRateNone">Not yet rated</li>
+																																														{% endif %}
+																																														                                        </ul>
+																																																			                                        <div class="SHcstmRLbl">
+																																																									                                                NerdWallet rating
+																																																															                                                <div class="SHcstmRLblIco">
+																																																																						                                                        <div class="SHcstmRLblToolTip">NerdWallet's ratings are determined by our editorial team. The scoring formula takes into account consumer complaint and customer satisfaction data.</div>
+																																																																													                                                </div>
+																																																																																			                                        </div>
+																																																																																								                                </div>
+																																																																																												                        </div>
+																																																																																															                        <div class="goButtonContainer">
+																																																																																																			                                <button type="button" class="button" onclick="sh.click({{i}}, '{{adv.clickurl}}')">
+																																																																																																								                                        <span class="button__text">Get Quote</span>
+																																																																																																													                                </button>
+																																																																																																																	                        </div>
+																																																																																																																				                </div>
+																																																																																																																						{% set i = i + 1%}
+
+																																																																																																																						{%endfor%}
