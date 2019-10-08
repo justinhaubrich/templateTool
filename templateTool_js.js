@@ -1,6 +1,6 @@
 //Javascript to handle the template tool
 const config = {};
-const script_path = '';
+const script_path = 'http://10.60.153.99:3033/templateCompiler/';
 
 //Using the FileReader API (https://developer.mozilla.org/en-US/docs/Web/API/FileReader)
 var reader = new FileReader()
