@@ -32,6 +32,8 @@ $('#submitButton').click(function (e) {
 		config.templateType = 'paste';
 		config.text = $('textarea').val().toString();
 		//the name of the file needs to be passed to the ajax
+		config.name = ('Template Pasted at: ' + Date());
+		nunjucks_callback();
 	}
 	//user did not upload or paste a template...
 	else {
@@ -48,9 +50,14 @@ function nunjucks_callback() {
 		success: function (res, status, jqXHR) {
 			console.log(res, status, jqXHR);
 			config.precompiled = js_beautify(res.precompiled.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'));
-			let precompiled = new swal('<pre><code>' + config.precompiled + '</pre></code>');
-			$('#swal2-title').css({'font-size':'10pt', 'text-align':'left', 'word-break':'break-word'});
+			let precompiled = new swal('<pre><code id="code_to_copy">' + config.precompiled.replace(/& gt;/g, '>').replace(/& lt;/g, '<')  + '</pre></code>');
+			$('#swal2-title').css({'font-size':'10pt', 'text-align':'left', 'word-break':'break-word','cursor':'copy'});
 			$('.swal2-popup').css({'width':'90%'});
+			//add the copy to clipboard click handler to the text
+			$('#swal2-title').click(function () {
+				copy_to_clipboard();
+				new swal('The precompiled template function has been copied to your clipboard');
+			});
 
 		},
 		error: function (jqXHR, status, error) {
@@ -66,3 +73,21 @@ function nunjucks_callback() {
 }
 
 
+//function to copy to clipboard
+function copy_to_clipboard() {
+	//window.copy(document.getElementById('code_to_copy').textContent);
+	let code_to_copy = document.getElementById('code_to_copy').textContent;
+	copyToClipboard(code_to_copy);
+}
+function copyToClipboard(text) {
+	    var dummy = document.createElement("textarea");
+	    // to avoid breaking orgain page when copying more words
+	     // cant copy when adding below this code
+	         // dummy.style.display = 'none'
+	             document.body.appendChild(dummy);
+	                 //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+	                     dummy.value = text;
+	                         dummy.select();
+	                             document.execCommand("copy");
+	                                 document.body.removeChild(dummy);
+	                                 }
