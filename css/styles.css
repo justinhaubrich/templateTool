@@ -1,5 +1,6 @@
 p.text{text-align:center;color:white;font-family:sans-serif;font-weight:bold;}
 textarea {display:block;margin:auto;height:500px; width: 75%;border-radius:5px;max-width:75%;min-width:75%;min-height:250px;}
+code {white-space:pre-wrap;}
 #submitButton {font-size:20pt;border-radius:5px;background-color:white;color:#2690EB;border-style:solid}
 #submit {margin:auto;display:block;text-align:center;padding:25px;}
 #swal2-title {font-family:sans-serif;}
