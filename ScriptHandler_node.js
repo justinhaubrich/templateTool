@@ -14,8 +14,9 @@ app.post('/templateCompiler/', function (req, res) {
 	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	console.log(nunjucks);
 	let body = req.body;
+	let name = body.name.toString();
 	let template = body.template;
-	let precompiled = nunjucks.precompileString(template, {name:'Quinstreet-Nunjucks-Tool'});
+	let precompiled = nunjucks.precompileString(template, {name:req.body.name});
 	//res.send(req.param);
 	res.send({template:template, precompiled:precompiled});
 
