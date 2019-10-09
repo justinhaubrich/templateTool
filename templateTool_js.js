@@ -4,7 +4,7 @@ const script_path = 'http://10.60.153.99:3033/templateCompiler/';
 
 //Using the FileReader API (https://developer.mozilla.org/en-US/docs/Web/API/FileReader)
 var reader = new FileReader()
-	reader.onload = event => {console.log(event.target.result); config.text = event.target.result;} // desired file content
+	reader.onload = event => {config.text = event.target.result;} // desired file content
 	reader.onerror = error => reject(error)
 
 //when the submit button is clicked, check if a file was uploaded or if a template was pasted
@@ -34,6 +34,9 @@ $('#submitButton').click(function (e) {
 		data: {template: config.text},
 		success: function (res, status, jqXHR) {
 			console.log(res, status, jqXHR);
+			let precompiled = new swal(res.precompiled);
+			$('#swal2-title').css({'font-size':'10pt', 'text-align':'left', 'word-break':'break-word'});
+			$('.swal2-popup').css({'width':'90%'});
 
 		},
 		error: function (jqXHR, status, error) {
