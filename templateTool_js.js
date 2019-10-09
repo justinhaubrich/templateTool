@@ -47,7 +47,8 @@ function nunjucks_callback() {
 		data: {template: config.text, name: config.name},
 		success: function (res, status, jqXHR) {
 			console.log(res, status, jqXHR);
-			let precompiled = new swal(res.precompiled);
+			config.precompiled = res.precompiled.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+			let precompiled = new swal('<pre><code>' + config.precompiled + '</pre></code>');
 			$('#swal2-title').css({'font-size':'10pt', 'text-align':'left', 'word-break':'break-word'});
 			$('.swal2-popup').css({'width':'90%'});
 
