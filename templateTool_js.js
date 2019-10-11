@@ -76,7 +76,8 @@ function nunjucks_callback() {
 //function to copy to clipboard
 function copy_to_clipboard() {
 	//window.copy(document.getElementById('code_to_copy').textContent);
-	let code_to_copy = document.getElementById('code_to_copy').textContent;
+	//let code_to_copy = document.getElementById('code_to_copy').textContent;
+	let code_to_copy = js_beautify($('#code_to_copy')[0].textContent);
 	copyToClipboard(code_to_copy);
 }
 function copyToClipboard(text) {
